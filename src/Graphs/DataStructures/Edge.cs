@@ -25,7 +25,7 @@ internal class Edge
     /// <summary>
     /// The weight of the Edge.
     /// </summary>
-    public required int Weight { get; init; }
+    public required float Weight { get; init; }
 
     /// <summary>
     /// Creates an instance of the <see cref="Edge"/> class.
@@ -42,7 +42,7 @@ internal class Edge
     /// <param name="terminal">The terminal vertex of the Edge.</param>
     /// <param name="weight">The weight of the Edge.</param>
     [SetsRequiredMembers]
-    public Edge(char id, Vertex source, Vertex terminal, int weight)
+    public Edge(char id, Vertex source, Vertex terminal, float weight)
     {
         Id = id;
         SourceVertex = source;
