@@ -6,7 +6,7 @@ namespace Graphs.DataStructures;
 /// <summary>
 /// A vertex / node in a <see cref="IGraph"/>.
 /// </summary>
-internal readonly struct Vertex
+internal class Vertex
 {
     /// <summary>
     /// The id of the Vertex.
