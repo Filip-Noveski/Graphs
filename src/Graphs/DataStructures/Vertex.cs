@@ -1,4 +1,5 @@
 ﻿using Graphs.Interfaces;
+using Graphs.Models;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Graphs.DataStructures;
@@ -16,7 +17,12 @@ internal class Vertex
     /// <summary>
     /// A list of edges whose source vertex is this instance.
     /// </summary>
-    public List<Edge> OutgoingEdges { get; } = new();
+    public List<Edge> OutgoingEdges { get; }
+
+    /// <summary>
+    /// A list of paths to all vertices in the graph.
+    /// </summary>
+    public List<Pathing> Paths { get; }
 
     /// <summary>
     /// Creates a new instace of the <see cref="Vertex"/> struct.
@@ -24,6 +30,7 @@ internal class Vertex
     public Vertex()
     {
         OutgoingEdges = new();
+        Paths = new();
     }
 
     /// <summary>
@@ -35,5 +42,6 @@ internal class Vertex
     {
         Id = id;
         OutgoingEdges = new();
+        Paths = new();
     }
 }
