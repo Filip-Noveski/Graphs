@@ -1,4 +1,6 @@
-﻿using Graphs.Interfaces;
+﻿using Graphs.Exceptions;
+using Graphs.Extensions;
+using Graphs.Interfaces;
 
 namespace Graphs.DataStructures;
 
@@ -7,19 +9,62 @@ namespace Graphs.DataStructures;
 /// </summary>
 public class Graph : IGraph
 {
+    private readonly List<Vertex> _vertices;
+    private readonly List<Edge> _edges;
+
+    public Graph()
+    {
+        _vertices = new();
+        _edges = new();
+    }
+
     public void CreateVertex(char id)
     {
-        throw new NotImplementedException();
+        if (_vertices.Contains(v => v.Id == id))
+        {
+            throw new DuplicateIdException(nameof(Vertex), id);
+        }
+
+        Vertex v = new(id);
+        _vertices.Add(v);
     }
 
     public void DeleteVertex(char id)
     {
-        throw new NotImplementedException();
+        _vertices.Remove(v => v.Id == id);
     }
 
     public void CreateEdge(char id, char sourceVertex, char targetVertex, int weight)
     {
-        throw new NotImplementedException();
+        if (_edges.Contains(e => e.Id == id))
+        {
+            throw new DuplicateIdException(nameof(Edge), id);
+        }
+
+        Vertex? source = null;
+        Vertex? terminal = null;
+
+        foreach (Vertex v in _vertices)
+        {
+            if (v.Id == sourceVertex)
+            {
+                source = v;
+            }
+            if (v.Id == targetVertex)
+            {
+                terminal = v;
+            }
+            if (source is not null && terminal is not null)
+            {
+                break;
+            }
+        }
+
+        Edge e = new(
+            id,
+            source ?? throw new IdNotFoundException(nameof(Vertex), sourceVertex),
+            terminal ?? throw new IdNotFoundException(nameof(Vertex), targetVertex),
+            weight);
     }
 
     public void DeleteEdge(char id)
