@@ -22,6 +22,10 @@ public struct Pathing
     /// </summary>
     public List<char> VertexIds { get; set; }
 
+    /// <summary>
+    /// Returns a span to the list of vertices to traverse.
+    /// </summary>
+    /// <returns>A span to the list of vertices to traverse.</returns>
     public readonly ReadOnlySpan<char> GetRoute()
     {
         return CollectionsMarshal.AsSpan(VertexIds);
