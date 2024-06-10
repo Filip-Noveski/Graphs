@@ -20,9 +20,9 @@ internal class Vertex
     public List<Edge> OutgoingEdges { get; }
 
     /// <summary>
-    /// A list of paths to all vertices in the graph.
+    /// A dictionary mapping vertex ids to paths to all vertices in the graph.
     /// </summary>
-    public List<Pathing> Paths { get; }
+    public Dictionary<char, Pathing> Paths { get; }
 
     /// <summary>
     /// Creates a new instace of the <see cref="Vertex"/> struct.

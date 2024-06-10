@@ -25,7 +25,7 @@ internal static class VertexPathingUtilities
                 pathing.TotalWeight = 0;
             }
 
-            vertex.Paths.Add(pathing);
+            vertex.Paths.Add(pathing.TargetVertexId, pathing);
         }
     }
 }
