@@ -1,6 +1,9 @@
 ﻿using Graphs.Exceptions;
 using Graphs.Extensions;
 using Graphs.Interfaces;
+using Graphs.Models;
+using Graphs.Utilities;
+using System.Runtime.InteropServices;
 
 namespace Graphs.DataStructures;
 
@@ -81,14 +84,55 @@ public class Graph : IGraph
         _edges.First(e => e.Id == id).Weight = newWeight;
     }
 
+    private static bool BellmanFordIteration(Vertex vertex, ref ReadOnlySpan<Edge> edges)
+    {
+        bool improved = false;
+        for (int i = 0; i < edges.Length; i++)
+        {
+            Edge e = edges[i];
+            ref Pathing pathing = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.TerminalVertex.Id, out _);
+            float currentDistance = pathing.TotalWeight;
+            float newDistance = vertex.Paths[e.SourceVertex.Id].TotalWeight + e.Weight;
+
+            if (currentDistance > newDistance)
+            {
+                improved = true;
+                pathing.TotalWeight = newDistance;
+            }
+        }
+
+        return improved;
+    }
+
+    private void BellmanFord(Vertex vertex)
+    {
+        VertexPathingUtilities.ResetPaths(vertex, _vertices);
+
+        ReadOnlySpan<Edge> edges = CollectionsMarshal.AsSpan(_edges);
+        int vertexCount = _vertices.Count;
+        for (int i = 0; i < vertexCount; i++)
+        {
+            bool improved = BellmanFordIteration(vertex, ref edges);
+            if (!improved)
+            {
+                return;
+            }
+        }
+
+        throw new NegativeWeightCycleException();
+    }
+
     public void BellmanFord()
     {
-        throw new NotImplementedException();
+        foreach (Vertex v in _vertices)
+        {
+            BellmanFord(v);
+        }
     }
 
     public void BellmanFord(char sourceVertexId)
     {
-        throw new NotImplementedException();
+        BellmanFord(_vertices.First(v => v.Id == sourceVertexId));
     }
 
     public void DependencyListSP()
