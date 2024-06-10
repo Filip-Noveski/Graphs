@@ -84,20 +84,33 @@ public class Graph : IGraph
         _edges.First(e => e.Id == id).Weight = newWeight;
     }
 
+    public (float Weight, char[] VertexIds) GetPathBetween(char source, char target)
+    {
+        Vertex s = _vertices.FirstOrDefault(e => e.Id == source) 
+            ?? throw new IdNotFoundException(nameof(Vertex), source);
+
+        Pathing pathing = s.Paths[target];
+        return (pathing.TotalWeight, pathing.VertexIds.ToArray());
+    }
+
     private static bool BellmanFordIteration(Vertex vertex, ref ReadOnlySpan<Edge> edges)
     {
         bool improved = false;
         for (int i = 0; i < edges.Length; i++)
         {
             Edge e = edges[i];
-            ref Pathing pathing = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.TerminalVertex.Id, out _);
-            float currentDistance = pathing.TotalWeight;
-            float newDistance = vertex.Paths[e.SourceVertex.Id].TotalWeight + e.Weight;
+            ref Pathing pathingToTarget = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.TerminalVertex.Id, out _);
+            ref Pathing pathingToSource = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.SourceVertex.Id, out _);
+            float currentDistance = pathingToTarget.TotalWeight;
+            float newDistance = pathingToSource.TotalWeight + e.Weight;
 
             if (currentDistance > newDistance)
             {
                 improved = true;
-                pathing.TotalWeight = newDistance;
+                pathingToTarget.TotalWeight = newDistance;
+                pathingToTarget.VertexIds.Clear();
+                pathingToTarget.VertexIds.AddRange(pathingToSource.VertexIds);
+                pathingToTarget.VertexIds.Add(e.TerminalVertex.Id);
             }
         }
 

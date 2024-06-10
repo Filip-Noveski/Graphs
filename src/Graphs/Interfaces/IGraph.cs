@@ -48,6 +48,14 @@ public interface IGraph
     void DeleteEdge(char id);
 
     /// <summary>
+    /// Returns the currently found shortest path between the specified vertices.
+    /// </summary>
+    /// <param name="source">The id of the source vertex.</param>
+    /// <param name="target">The id of the target vertex.</param>
+    /// <returns>A tuple with the total weight and list of vertex ids to go through.</returns>
+    (float Weight, char[] VertexIds) GetPathBetween(char source, char target);
+    
+    /// <summary>
     /// Performs Bellman-Ford over all vertices.
     /// </summary>
     void BellmanFord();
