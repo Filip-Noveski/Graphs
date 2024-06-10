@@ -25,7 +25,7 @@ internal class Edge
     /// <summary>
     /// The weight of the Edge.
     /// </summary>
-    public required float Weight { get; init; }
+    public required float Weight { get; set; }
 
     /// <summary>
     /// Creates an instance of the <see cref="Edge"/> class.
