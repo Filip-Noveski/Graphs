@@ -44,6 +44,7 @@ public class Graph : IGraph
         Vertex? source = null;
         Vertex? terminal = null;
 
+        // TODO: extract this
         foreach (Vertex v in _vertices)
         {
             if (v.Id == sourceVertex)
@@ -65,16 +66,19 @@ public class Graph : IGraph
             source ?? throw new IdNotFoundException(nameof(Vertex), sourceVertex),
             terminal ?? throw new IdNotFoundException(nameof(Vertex), targetVertex),
             weight);
+
+        source.OutgoingEdges.Add(e);
+        _edges.Add(e);
     }
 
     public void DeleteEdge(char id)
     {
-        throw new NotImplementedException();
+        _edges.Remove(e => e.Id == id);
     }
 
     public void UpdateEdgeWeight(char id, int newWeight)
     {
-        throw new NotImplementedException();
+        _edges.First(e => e.Id == id).Weight = newWeight;
     }
 
     public void BellmanFord()
