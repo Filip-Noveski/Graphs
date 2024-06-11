@@ -30,7 +30,7 @@ public interface IGraph
     /// <param name="targetVertex">The id of the terminal vertex of the edge.</param>
     /// <param name="weight">The weight of the edge.</param>
     /// <exception cref="DuplicateIdException"></exception>
-    void CreateEdge(char id, char sourceVertex, char targetVertex, int weight);
+    void CreateEdge(char id, char sourceVertex, char targetVertex, float weight);
 
     /// <summary>
     /// Replaces the old weight with the provided <paramref name="newWeight"/>

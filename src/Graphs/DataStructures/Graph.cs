@@ -36,7 +36,7 @@ public class Graph : IGraph
         _vertices.Remove(v => v.Id == id);
     }
 
-    public void CreateEdge(char id, char sourceVertex, char targetVertex, int weight)
+    public void CreateEdge(char id, char sourceVertex, char targetVertex, float weight)
     {
         if (_edges.Contains(e => e.Id == id))
         {
