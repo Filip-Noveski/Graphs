@@ -94,9 +94,9 @@ public class Graph : IGraph
 
     public void BellmanFord()
     {
-        BellmanFordService service = new(ref _vertices, ref _edges);
         foreach (Vertex v in _vertices)
         {
+            BellmanFordService service = new(ref _vertices, ref _edges);
             service.Execute(v);
         }
     }
@@ -110,9 +110,9 @@ public class Graph : IGraph
 
     public void DependencyListSP()
     {
-        DependencyListSPService service = new(ref _vertices, ref _edges);
         foreach (Vertex v in _vertices)
         {
+            DependencyListSPService service = new(ref _vertices, ref _edges);
             service.Execute(v);
         }
     }
@@ -126,11 +126,17 @@ public class Graph : IGraph
 
     public void QueuedSP()
     {
-        throw new NotImplementedException();
+        foreach (Vertex v in _vertices)
+        {
+            QueueBasedSPService service = new(ref _vertices, ref _edges);
+            service.Execute(v);
+        }
     }
 
     public void QueuedSP(char sourceVertexId)
     {
-        throw new NotImplementedException();
+        QueueBasedSPService service = new(ref _vertices, ref _edges);
+        // TODO: consider trying to optimise search for vertex
+        service.Execute(_vertices.First(v => v.Id == sourceVertexId));
     }
 }
