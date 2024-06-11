@@ -1,0 +1,66 @@
+﻿using BenchmarkDotNet.Attributes;
+using Graphs.Benchmarks.Generators;
+using Graphs.DataStructures;
+using System.Diagnostics;
+
+namespace Graphs.Benchmarks;
+
+[MemoryDiagnoser(false)]
+public class GraphsWithNwcApspBenchmarks
+{
+    private Graph _graph = null!;
+
+    [Params([0, 1, 2])]
+    public int Id { get; set; }
+
+    [GlobalSetup]
+    public void Setup()
+    {
+        _graph = Id switch
+        {
+            0 => GraphsWithNWCycleBenchmarkingHelper.GraphWith8VerticesAnd11Edges,
+            1 => GraphsWithNWCycleBenchmarkingHelper.GraphWith23VerticesAnd35Edges,
+            2 => GraphsWithNWCycleBenchmarkingHelper.GraphWith47VerticesAnd68Edges,
+            _ => throw new UnreachableException()
+        };
+    }
+
+    [Benchmark]
+    public void BellmanFord()
+    {
+        try
+        {
+            _graph.BellmanFord(); 
+        }
+        catch
+        {
+            // do nothing
+        }
+    }
+
+    [Benchmark]
+    public void DependencyLists()
+    {
+        try 
+        { 
+            _graph.DependencyListSP();
+        }
+        catch
+        {
+            // do nothing
+        }
+    }
+
+    [Benchmark]
+    public void Queues()
+    {
+        try 
+        { 
+            _graph.QueuedSP();
+        }
+        catch
+        {
+            // do nothing
+        }
+    }
+}
