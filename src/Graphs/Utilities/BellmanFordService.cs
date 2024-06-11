@@ -1,6 +1,5 @@
 ﻿using Graphs.DataStructures;
 using Graphs.Exceptions;
-using Graphs.Models;
 using System.Runtime.InteropServices;
 
 namespace Graphs.Utilities;
@@ -21,20 +20,7 @@ internal readonly ref struct BellmanFordService
         bool improved = false;
         for (int i = 0; i < _edges.Length; i++)
         {
-            Edge e = _edges[i];
-            ref Pathing pathingToTarget = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.TerminalVertex.Id, out _);
-            ref Pathing pathingToSource = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.SourceVertex.Id, out _);
-            float currentDistance = pathingToTarget.TotalWeight;
-            float newDistance = pathingToSource.TotalWeight + e.Weight;
-
-            if (currentDistance > newDistance)
-            {
-                improved = true;
-                pathingToTarget.TotalWeight = newDistance;
-                pathingToTarget.VertexIds.Clear();
-                pathingToTarget.VertexIds.AddRange(pathingToSource.VertexIds);
-                pathingToTarget.VertexIds.Add(e.TerminalVertex.Id);
-            }
+            improved |= VertexPathingUtilities.CheckForImprovement(vertex, _edges[i]);
         }
 
         return improved;
