@@ -3,7 +3,6 @@ using Graphs.Extensions;
 using Graphs.Interfaces;
 using Graphs.Models;
 using Graphs.Utilities;
-using System.Runtime.InteropServices;
 
 namespace Graphs.DataStructures;
 
@@ -12,8 +11,8 @@ namespace Graphs.DataStructures;
 /// </summary>
 public class Graph : IGraph
 {
-    private readonly List<Vertex> _vertices;
-    private readonly List<Edge> _edges;
+    private List<Vertex> _vertices;
+    private List<Edge> _edges;
 
     public Graph()
     {
@@ -93,59 +92,20 @@ public class Graph : IGraph
         return (pathing.TotalWeight, pathing.VertexIds.ToArray());
     }
 
-    private static bool BellmanFordIteration(Vertex vertex, ref ReadOnlySpan<Edge> edges)
-    {
-        bool improved = false;
-        for (int i = 0; i < edges.Length; i++)
-        {
-            Edge e = edges[i];
-            ref Pathing pathingToTarget = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.TerminalVertex.Id, out _);
-            ref Pathing pathingToSource = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, e.SourceVertex.Id, out _);
-            float currentDistance = pathingToTarget.TotalWeight;
-            float newDistance = pathingToSource.TotalWeight + e.Weight;
-
-            if (currentDistance > newDistance)
-            {
-                improved = true;
-                pathingToTarget.TotalWeight = newDistance;
-                pathingToTarget.VertexIds.Clear();
-                pathingToTarget.VertexIds.AddRange(pathingToSource.VertexIds);
-                pathingToTarget.VertexIds.Add(e.TerminalVertex.Id);
-            }
-        }
-
-        return improved;
-    }
-
-    private void BellmanFord(Vertex vertex)
-    {
-        VertexPathingUtilities.ResetPaths(vertex, _vertices);
-
-        ReadOnlySpan<Edge> edges = CollectionsMarshal.AsSpan(_edges);
-        int vertexCount = _vertices.Count;
-        for (int i = 0; i < vertexCount; i++)
-        {
-            bool improved = BellmanFordIteration(vertex, ref edges);
-            if (!improved)
-            {
-                return;
-            }
-        }
-
-        throw new NegativeWeightCycleException();
-    }
-
     public void BellmanFord()
     {
+        BellmanFordService service = new(ref _vertices, ref _edges);
         foreach (Vertex v in _vertices)
         {
-            BellmanFord(v);
+            service.Execute(v);
         }
     }
 
     public void BellmanFord(char sourceVertexId)
     {
-        BellmanFord(_vertices.First(v => v.Id == sourceVertexId));
+        BellmanFordService service = new(ref _vertices, ref _edges);
+        // TODO: consider trying to optimise search for vertex
+        service.Execute(_vertices.First(v => v.Id == sourceVertexId));
     }
 
     public void DependencyListSP()
