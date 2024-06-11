@@ -110,12 +110,18 @@ public class Graph : IGraph
 
     public void DependencyListSP()
     {
-        throw new NotImplementedException();
+        DependencyListSPService service = new(ref _vertices, ref _edges);
+        foreach (Vertex v in _vertices)
+        {
+            service.Execute(v);
+        }
     }
 
     public void DependencyListSP(char sourceVertexId)
     {
-        throw new NotImplementedException();
+        DependencyListSPService service = new(ref _vertices, ref _edges);
+        // TODO: consider trying to optimise search for vertex
+        service.Execute(_vertices.First(v => v.Id == sourceVertexId));
     }
 
     public void QueuedSP()
