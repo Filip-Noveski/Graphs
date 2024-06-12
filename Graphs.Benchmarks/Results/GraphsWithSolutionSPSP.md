@@ -33,3 +33,21 @@
 | BellmanFord     | 2  | 3,807.9 ns | 51.82 ns | 43.27 ns |    2736 B |
 | DependencyLists | 2  | 5,330.9 ns | 39.58 ns | 37.02 ns |    4560 B |
 | Queues          | 2  | 4,498.8 ns | 39.14 ns | 30.56 ns |    4648 B |
+
+## Run 3
+
+* Bellman-Ford using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>;
+* Dependency-Lists using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code> and <code style="color: #92D050">DependencyList</code> ref struct to mark dependencies with custom <code style="color: #00F091">Wrapper<span style="color: #FFFFFF">&lt;</span><span style="color: #B2D090">T</span><span style="color: #FFFFFF">&gt;</span></code> to store next enqueue;
+* Queues using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>, <code style="color: #00F091">HashSet<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">&gt;</span></code> to queue vertices and <code style="color: #00F091">Dictionary<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">, <span style="color: #0090C0">int</span><span style="color: #FFFFFF">&gt;</span></code> to count number of enqueues both with initial capacity set to number of vertices;
+
+| Method          | Id | Mean       | Error    | StdDev    | Allocated |
+|---------------- |--- |-----------:|---------:|----------:|----------:|
+| BellmanFord     | 0  |   951.4 ns |  9.66 ns |   9.04 ns |     608 B |
+| DependencyLists | 0  | 1,089.5 ns |  6.18 ns |   5.48 ns |    1000 B |
+| Queues          | 0  | 1,591.2 ns |  4.73 ns |   4.42 ns |    1704 B |
+| BellmanFord     | 1  | 2,532.9 ns | 50.57 ns |  70.90 ns |    2456 B |
+| DependencyLists | 1  | 3,395.1 ns | 29.95 ns |  25.01 ns |    3424 B |
+| Queues          | 1  | 5,668.8 ns | 38.00 ns |  31.73 ns |    4840 B |
+| BellmanFord     | 2  | 3,980.0 ns | 77.75 ns |  95.48 ns |    2736 B |
+| DependencyLists | 2  | 5,404.8 ns | 95.74 ns | 121.08 ns |    4560 B |
+| Queues          | 2  | 4,460.7 ns | 27.81 ns |  23.22 ns |    6560 B |

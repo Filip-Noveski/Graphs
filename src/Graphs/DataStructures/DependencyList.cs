@@ -21,6 +21,10 @@ internal ref struct DependencyList
 
     public DependencyList AddDependency(Edge edge)
     {
+        /*
+         * Simplified implementation, relies on user providing vertices with
+         * a +1 increment between ids so as not to overlap. 
+         */ 
         int index = edge.SourceVertex.Id % _indices.Length;
 
         if (_counts[index] != 0)

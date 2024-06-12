@@ -10,13 +10,11 @@ internal ref struct DependencyListSPService
     private readonly ReadOnlySpan<Vertex> _vertices;
     private readonly ReadOnlySpan<Edge> _edges;
     private DependencyList _dependencies;
-    private int _nextDependencyIndex;
 
     public DependencyListSPService(ref List<Vertex> vertices, ref List<Edge> edges)
     {
         _vertices = CollectionsMarshal.AsSpan(vertices);
         _edges = CollectionsMarshal.AsSpan(edges);
-        _nextDependencyIndex = 0;
         _dependencies = new(vertices.Count, edges.Count);
     }
 

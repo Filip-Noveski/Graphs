@@ -33,3 +33,21 @@
 | BellmanFord     | 2  |  3.744 us | 0.0510 us | 0.0426 us |   2.67 KB |
 | DependencyLists | 2  |  5.354 us | 0.0467 us | 0.0437 us |   4.45 KB |
 | Queues          | 2  |  4.262 us | 0.0477 us | 0.0423 us |    4.5 KB |
+
+## Run 3
+
+* Bellman-Ford using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>;
+* Dependency-Lists using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code> and <code style="color: #92D050">DependencyList</code> ref struct to mark dependencies with custom <code style="color: #00F091">Wrapper<span style="color: #FFFFFF">&lt;</span><span style="color: #B2D090">T</span><span style="color: #FFFFFF">&gt;</span></code> to store next enqueue;
+* Queues using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>, <code style="color: #00F091">HashSet<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">&gt;</span></code> to queue vertices and <code style="color: #00F091">Dictionary<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">, <span style="color: #0090C0">int</span><span style="color: #FFFFFF">&gt;</span></code> to count number of enqueues both with initial capacity set to number of vertices;
+
+| Method          | Id | Mean      | Error     | StdDev    | Median    | Allocated |
+|---------------- |--- |----------:|----------:|----------:|----------:|----------:|
+| BellmanFord     | 0  |  8.334 us | 0.0389 us | 0.0325 us |  8.334 us |    1.3 KB |
+| DependencyLists | 0  | 11.530 us | 0.2297 us | 0.4023 us | 11.350 us |   1.64 KB |
+| Queues          | 0  | 15.619 us | 0.1629 us | 0.1272 us | 15.647 us |   3.99 KB |
+| BellmanFord     | 1  | 26.709 us | 0.5256 us | 0.8182 us | 26.435 us |   7.53 KB |
+| DependencyLists | 1  | 10.390 us | 0.0902 us | 0.0800 us | 10.365 us |   2.47 KB |
+| Queues          | 1  | 55.275 us | 0.4950 us | 0.4388 us | 55.336 us |  17.31 KB |
+| BellmanFord     | 2  |  4.317 us | 0.0674 us | 0.0563 us |  4.319 us |   2.67 KB |
+| DependencyLists | 2  |  5.411 us | 0.0458 us | 0.0383 us |  5.430 us |   4.45 KB |
+| Queues          | 2  |  4.373 us | 0.0844 us | 0.0866 us |  4.336 us |   6.37 KB |

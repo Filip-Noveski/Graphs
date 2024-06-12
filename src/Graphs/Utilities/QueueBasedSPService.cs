@@ -16,8 +16,8 @@ internal readonly ref struct QueueBasedSPService
     {
         _vertices = CollectionsMarshal.AsSpan(vertices);
         _edges = CollectionsMarshal.AsSpan(edges);
-        _queue = new();
-        _enqueueCounts = new();
+        _queue = new(vertices.Count);
+        _enqueueCounts = new(vertices.Count);
     }
 
     private readonly void Iteration(Vertex source, Vertex vertex)
