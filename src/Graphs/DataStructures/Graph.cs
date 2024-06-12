@@ -139,4 +139,18 @@ public class Graph : IGraph
         // TODO: consider trying to optimise search for vertex
         service.Execute(_vertices.First(v => v.Id == sourceVertexId));
     }
+
+    public void OrderEdgesByDfs(char vertexId)
+    {
+        DfsGraphTraverser traverser = new();
+        Vertex vertex = _vertices.First(x => x.Id == vertexId);
+        _edges = traverser.Traverse(vertex);
+    }
+
+    public void OrderEdgesByBfs(char vertexId)
+    {
+        BfsGraphTraverser traverser = new();
+        Vertex vertex = _vertices.First(x => x.Id == vertexId);
+        _edges = traverser.Traverse(vertex);
+    }
 }

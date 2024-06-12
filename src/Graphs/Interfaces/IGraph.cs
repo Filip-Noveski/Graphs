@@ -48,6 +48,18 @@ public interface IGraph
     void DeleteEdge(char id);
 
     /// <summary>
+    /// Sets the order of the edges based on Depth-First Search.
+    /// </summary>
+    /// <param name="vertexId">The vertex to start from.</param>
+    void OrderEdgesByDfs(char vertexId);
+
+    /// <summary>
+    /// Sets the order of the edges based on Breadth-First Search.
+    /// </summary>
+    /// <param name="vertexId">The vertex to start from.</param>
+    void OrderEdgesByBfs(char vertexId);
+
+    /// <summary>
     /// Returns the currently found shortest path between the specified vertices.
     /// </summary>
     /// <param name="source">The id of the source vertex.</param>

@@ -23,6 +23,8 @@ public class GraphsWithNwcSpspBenchmarks
             2 => GraphsWithNWCycleBenchmarkingHelper.GraphWith49VerticesAnd69Edges,
             _ => throw new UnreachableException()
         };
+
+        _graph.OrderEdgesByDfs('A');
     }
 
     [Benchmark]
