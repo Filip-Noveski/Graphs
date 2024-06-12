@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphs.Tests", "tests\Graph
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{9A15CFA5-CF6D-45DA-AECF-24122DE925F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphs.Benchmarks", "Graphs.Benchmarks\Graphs.Benchmarks.csproj", "{049E5967-1F5F-46E9-BD2A-135C5C811022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphs.Benchmarks", "benchmarks\Graphs.Benchmarks\Graphs.Benchmarks.csproj", "{049E5967-1F5F-46E9-BD2A-135C5C811022}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{3309B0B9-48F8-4FE6-8B9D-E876C26C30E2}"
 	ProjectSection(SolutionItems) = preProject
