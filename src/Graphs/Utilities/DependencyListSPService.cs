@@ -22,8 +22,9 @@ internal ref struct DependencyListSPService
     {
         ReadOnlySpan<Dependency> edges = _dependencies.GetDependencies(edge.TerminalVertex.Id);
 
-        foreach ((char _, Edge e) in edges)
+        for (int i = 0; i < edges.Length; i++)
         {
+            Edge e = edges[i].Edge;
             bool improved = VertexPathingUtilities.CheckForImprovement(source, e);
             
             if (!improved)

@@ -51,3 +51,21 @@
 | BellmanFord     | 2  |  4.317 us | 0.0674 us | 0.0563 us |  4.319 us |   2.67 KB |
 | DependencyLists | 2  |  5.411 us | 0.0458 us | 0.0383 us |  5.430 us |   4.45 KB |
 | Queues          | 2  |  4.373 us | 0.0844 us | 0.0866 us |  4.336 us |   6.37 KB |
+
+## Run 4
+
+* Bellman-Ford using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>;
+* Dependency-Lists using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code> and <code style="color: #92D050">DependencyList</code> ref struct to mark dependencies with custom <code style="color: #00F091">Wrapper<span style="color: #FFFFFF">&lt;</span><span style="color: #B2D090">T</span><span style="color: #FFFFFF">&gt;</span></code> to store next enqueue, <code><span style="color: #00F091">DependencyList</span>::AddDependency</code> method changed to <code style="color: #0090C0">void</code>;
+* Queues using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>, <code style="color: #00F091">HashSet<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">&gt;</span></code> to queue vertices and <code style="color: #00F091">Dictionary<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">, <span style="color: #0090C0">int</span><span style="color: #FFFFFF">&gt;</span></code> to count number of enqueues both with initial capacity set to number of vertices;
+
+| Method          | Id | Mean      | Error     | StdDev    | Allocated |
+|---------------- |--- |----------:|----------:|----------:|----------:|
+| BellmanFord     | 0  |  9.349 us | 0.1692 us | 0.2964 us |    1.3 KB |
+| DependencyLists | 0  | 10.348 us | 0.0859 us | 0.0717 us |   1.64 KB |
+| Queues          | 0  | 15.639 us | 0.1140 us | 0.1067 us |   3.99 KB |
+| BellmanFord     | 1  | 27.219 us | 0.5166 us | 0.4579 us |   7.53 KB |
+| DependencyLists | 1  | 10.464 us | 0.0779 us | 0.0608 us |   2.47 KB |
+| Queues          | 1  | 58.175 us | 0.7449 us | 0.6220 us |  17.31 KB |
+| BellmanFord     | 2  |  3.746 us | 0.0686 us | 0.0642 us |   2.67 KB |
+| DependencyLists | 2  |  4.477 us | 0.0469 us | 0.0439 us |   4.45 KB |
+| Queues          | 2  |  4.253 us | 0.0491 us | 0.0410 us |   6.37 KB |

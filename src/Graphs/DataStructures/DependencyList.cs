@@ -19,7 +19,7 @@ internal ref struct DependencyList
         _nextDependencyIndex = 0;
     }
 
-    public DependencyList AddDependency(Edge edge)
+    public void AddDependency(Edge edge)
     {
         /*
          * Simplified implementation, relies on user providing vertices with
@@ -30,15 +30,13 @@ internal ref struct DependencyList
         if (_counts[index] != 0)
         {
             MarkDependency(edge, index);
-            return this;
+            return;
         }
 
         _counts[index] = edge.SourceVertex.OutgoingEdges.Count;
         _indices[index] = _nextDependencyIndex;
         _nextDependencyIndex += _counts[index];
         MarkDependency(edge, index);
-
-        return this;
     }
 
     private readonly void MarkDependency(Edge edge, int index)
