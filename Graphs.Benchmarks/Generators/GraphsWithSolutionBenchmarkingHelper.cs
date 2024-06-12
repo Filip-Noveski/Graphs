@@ -1,5 +1,4 @@
-﻿using Graphs.Benchmarks.Extensions;
-using Graphs.DataStructures;
+﻿using Graphs.DataStructures;
 
 namespace Graphs.Benchmarks.Generators;
 
