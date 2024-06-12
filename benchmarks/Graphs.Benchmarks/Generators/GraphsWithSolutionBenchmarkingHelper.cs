@@ -82,7 +82,7 @@ internal class GraphsWithSolutionBenchmarkingHelper
         }
     }
 
-    public static Graph GraphWith47VerticesAnd68Edges
+    public static Graph GraphWith49VerticesAnd69Edges
     {
         get
         {

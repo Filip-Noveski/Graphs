@@ -20,7 +20,7 @@ public class GraphsWithNwcSpspBenchmarks
         {
             0 => GraphsWithNWCycleBenchmarkingHelper.GraphWith8VerticesAnd11Edges,
             1 => GraphsWithNWCycleBenchmarkingHelper.GraphWith23VerticesAnd35Edges,
-            2 => GraphsWithNWCycleBenchmarkingHelper.GraphWith47VerticesAnd68Edges,
+            2 => GraphsWithNWCycleBenchmarkingHelper.GraphWith49VerticesAnd69Edges,
             _ => throw new UnreachableException()
         };
     }

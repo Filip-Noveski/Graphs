@@ -20,7 +20,7 @@ public class GraphsWithSolutionSpspBenchmarks
         {
             0 => GraphsWithSolutionBenchmarkingHelper.GraphWith8VerticesAnd11Edges,
             1 => GraphsWithSolutionBenchmarkingHelper.GraphWith23VerticesAnd35Edges,
-            2 => GraphsWithSolutionBenchmarkingHelper.GraphWith47VerticesAnd68Edges,
+            2 => GraphsWithSolutionBenchmarkingHelper.GraphWith49VerticesAnd69Edges,
             _ => throw new UnreachableException()
         };
     }

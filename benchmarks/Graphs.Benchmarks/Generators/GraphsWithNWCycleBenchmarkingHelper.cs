@@ -82,7 +82,7 @@ internal class GraphsWithNWCycleBenchmarkingHelper
         }
     }
 
-    public static Graph GraphWith47VerticesAnd68Edges
+    public static Graph GraphWith49VerticesAnd69Edges
     {
         get
         {
@@ -100,21 +100,20 @@ internal class GraphsWithNWCycleBenchmarkingHelper
             g.CreateEdge(id++, GetId(1), GetId(2), Math.Sign(random.NextDouble() - 0.5) * 8);
             g.CreateEdge(id++, GetId(1), GetId(11), Math.Sign(random.NextDouble() - 0.5) * 49);
             g.CreateEdge(id++, GetId(2), GetId(4), Math.Sign(random.NextDouble() - 0.5) * 63);
-            g.CreateEdge(id++, GetId(3), GetId(4), Math.Sign(random.NextDouble() - 0.5) * 6);
             g.CreateEdge(id++, GetId(3), GetId(5), Math.Sign(random.NextDouble() - 0.5) * 4);
+            g.CreateEdge(id++, GetId(4), GetId(3), Math.Sign(random.NextDouble() - 0.5) * 6);
             g.CreateEdge(id++, GetId(4), GetId(5), Math.Sign(random.NextDouble() - 0.5) * 8);
             g.CreateEdge(id++, GetId(5), GetId(7), Math.Sign(random.NextDouble() - 0.5) * 31);
             g.CreateEdge(id++, GetId(5), GetId(9), Math.Sign(random.NextDouble() - 0.5) * 26);
-            g.CreateEdge(id++, GetId(6), GetId(7), Math.Sign(random.NextDouble() - 0.5) * 4);
             g.CreateEdge(id++, GetId(6), GetId(8), Math.Sign(random.NextDouble() - 0.5) * 32);
             g.CreateEdge(id++, GetId(6), GetId(36), Math.Sign(random.NextDouble() - 0.5) * 64);
+            g.CreateEdge(id++, GetId(7), GetId(6), Math.Sign(random.NextDouble() - 0.5) * 4);
             g.CreateEdge(id++, GetId(7), GetId(38), Math.Sign(random.NextDouble() - 0.5) * 57);
             g.CreateEdge(id++, GetId(8), GetId(9), Math.Sign(random.NextDouble() - 0.5) * 20);
             g.CreateEdge(id++, GetId(9), GetId(11), Math.Sign(random.NextDouble() - 0.5) * 42);
-            g.CreateEdge(id++, GetId(10), GetId(11), Math.Sign(random.NextDouble() - 0.5) * 4);
             g.CreateEdge(id++, GetId(10), GetId(48), Math.Sign(random.NextDouble() - 0.5) * 33);
+            g.CreateEdge(id++, GetId(11), GetId(10), Math.Sign(random.NextDouble() - 0.5) * 4);
             g.CreateEdge(id++, GetId(12), GetId(14), Math.Sign(random.NextDouble() - 0.5) * 20);
-            g.CreateEdge(id++, GetId(12), GetId(48), Math.Sign(random.NextDouble() - 0.5) * 13);
             g.CreateEdge(id++, GetId(13), GetId(14), Math.Sign(random.NextDouble() - 0.5) * 3);
             g.CreateEdge(id++, GetId(13), GetId(15), Math.Sign(random.NextDouble() - 0.5) * 3);
             g.CreateEdge(id++, GetId(14), GetId(15), Math.Sign(random.NextDouble() - 0.5) * 3);
@@ -164,6 +163,7 @@ internal class GraphsWithNWCycleBenchmarkingHelper
             g.CreateEdge(id++, GetId(44), GetId(46), Math.Sign(random.NextDouble() - 0.5) * 13);
             g.CreateEdge(id++, GetId(45), GetId(46), Math.Sign(random.NextDouble() - 0.5) * 29);
             g.CreateEdge(id++, GetId(47), GetId(48), Math.Sign(random.NextDouble() - 0.5) * 55);
+            g.CreateEdge(id++, GetId(48), GetId(12), Math.Sign(random.NextDouble() - 0.5) * 13);
 
             return g;
         }
