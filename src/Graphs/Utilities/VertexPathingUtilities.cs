@@ -30,8 +30,10 @@ internal static class VertexPathingUtilities
 
     public static bool CheckForImprovement(Vertex vertex, Edge edge)
     {
-        ref Pathing pathingToTarget = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, edge.TerminalVertex.Id, out _);
-        ref Pathing pathingToSource = ref CollectionsMarshal.GetValueRefOrAddDefault(vertex.Paths, edge.SourceVertex.Id, out _);
+        ref Pathing pathingToTarget = ref CollectionsMarshal
+            .GetValueRefOrAddDefault(vertex.Paths, edge.TerminalVertex.Id, out _);
+        ref Pathing pathingToSource = ref CollectionsMarshal
+            .GetValueRefOrAddDefault(vertex.Paths, edge.SourceVertex.Id, out _);
         float currentDistance = pathingToTarget.TotalWeight;
         float newDistance = pathingToSource.TotalWeight + edge.Weight;
 
