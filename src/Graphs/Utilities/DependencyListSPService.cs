@@ -1,33 +1,33 @@
 ﻿using Graphs.DataStructures;
 using Graphs.Exceptions;
+using Graphs.Models;
 using System.Runtime.InteropServices;
 
 namespace Graphs.Utilities;
 
-internal readonly ref struct DependencyListSPService
+internal ref struct DependencyListSPService
 {
     private readonly ReadOnlySpan<Vertex> _vertices;
     private readonly ReadOnlySpan<Edge> _edges;
-    private readonly Dictionary<char, List<Edge>> _dependencies;
+    private DependencyList _dependencies;
+    private int _nextDependencyIndex;
 
     public DependencyListSPService(ref List<Vertex> vertices, ref List<Edge> edges)
     {
         _vertices = CollectionsMarshal.AsSpan(vertices);
         _edges = CollectionsMarshal.AsSpan(edges);
-        _dependencies = new();
+        _nextDependencyIndex = 0;
+        _dependencies = new(vertices.Count, edges.Count);
     }
 
     private readonly void UpdateDependencies(Vertex source, Vertex loopInitiator, Edge edge)
     {
-        if (!_dependencies.TryGetValue(edge.TerminalVertex.Id, out List<Edge>? edges))
-        {
-            return;
-        }
+        ReadOnlySpan<Dependency> edges = _dependencies.GetDependencies(edge.TerminalVertex.Id);
 
-        foreach (Edge e in edges)
+        foreach ((char _, Edge e) in edges)
         {
             bool improved = VertexPathingUtilities.CheckForImprovement(source, e);
-
+            
             if (!improved)
             {
                 continue;
@@ -44,18 +44,7 @@ internal readonly ref struct DependencyListSPService
 
     private readonly void MarkDependency(Edge edge)
     {
-        ref List<Edge>? value = ref CollectionsMarshal.GetValueRefOrAddDefault(_dependencies, edge.SourceVertex.Id, out bool existed);
-
-        if (existed)
-        {
-            value!.Add(edge);
-            return;
-        }
-
-        value = new()
-        {
-            edge
-        };
+        _dependencies.AddDependency(edge);
     }
 
     public readonly void Execute(Vertex vertex)
