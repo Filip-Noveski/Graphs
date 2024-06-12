@@ -23,6 +23,8 @@ public class GraphsWithSolutionSpspBenchmarks
             2 => GraphsWithSolutionBenchmarkingHelper.GraphWith49VerticesAnd69Edges,
             _ => throw new UnreachableException()
         };
+
+        _graph.OrderEdgesByDfs('A');
     }
 
     [Benchmark]

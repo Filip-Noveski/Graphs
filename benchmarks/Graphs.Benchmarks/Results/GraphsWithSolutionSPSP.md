@@ -69,3 +69,23 @@
 | BellmanFord     | 47                | 68                | 3,798.0 ns |  62.84 ns | 52.47 ns |    2736 B |
 | DependencyLists | 47                | 68                | 4,479.4 ns |  38.39 ns | 35.91 ns |    4560 B |
 | Queues          | 47                | 68                | 4,396.6 ns |  44.96 ns | 37.54 ns |    6560 B |
+
+## Run 5
+
+* **Ordered edges by Depth-First Search**
+
+* Bellman-Ford using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>;
+* Dependency-Lists using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code> and <code style="color: #92D050">DependencyList</code> ref struct to mark dependencies with custom <code style="color: #00F091">Wrapper<span style="color: #FFFFFF">&lt;</span><span style="color: #B2D090">T</span><span style="color: #FFFFFF">&gt;</span></code> to store next enqueue, <code><span style="color: #00F091">DependencyList</span>::AddDependency</code> method changed to <code style="color: #0090C0">void</code>;
+* Queues using <code style="color: #92D050">ReadOnlySpan</code> to <code style="color: #00F091">Edge<span style="color: #FFFFFF">[]</span></code> and <code style="color: #00F091">Vertex<span style="color: #FFFFFF">[]</span></code> in <code style="color: #00F091">Graph</code>, <code style="color: #00F091">HashSet<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">&gt;</span></code> to queue vertices and <code style="color: #00F091">Dictionary<span style="color: #FFFFFF">&lt;</span>Vertex<span style="color: #FFFFFF">, <span style="color: #0090C0">int</span><span style="color: #FFFFFF">&gt;</span></code> to count number of enqueues both with initial capacity set to number of vertices;
+
+| Method          | Id | Mean       | Error    | StdDev   | Allocated |
+|---------------- |--- |-----------:|---------:|---------:|----------:|
+| BellmanFord     | 0  |   954.5 ns | 10.69 ns |  8.92 ns |     608 B |
+| DependencyLists | 0  |   945.6 ns |  6.13 ns |  5.12 ns |    1000 B |
+| Queues          | 0  | 1,598.2 ns | 20.04 ns | 18.74 ns |    1704 B |
+| BellmanFord     | 1  | 2,701.4 ns | 51.73 ns | 43.20 ns |    2368 B |
+| DependencyLists | 1  | 2,593.0 ns | 42.85 ns | 35.78 ns |    3256 B |
+| Queues          | 1  | 5,732.4 ns | 24.69 ns | 21.89 ns |    4840 B |
+| BellmanFord     | 2  | 2,838.1 ns | 54.45 ns | 68.86 ns |    2720 B |
+| DependencyLists | 2  | 2,511.9 ns | 20.50 ns | 16.00 ns |    3744 B |
+| Queues          | 2  | 4,450.4 ns | 32.95 ns | 27.51 ns |    6560 B |
